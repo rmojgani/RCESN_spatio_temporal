@@ -98,15 +98,15 @@ def model_predict(model,Xval):
     for i in range(Xval.shape[0]):  
         if i ==0:
             tt = Xval[0,:,:].reshape((1,lookback,nfeatures))
-            ypred[i,:] = model.predict(tt) 
         elif i < lookback:
             tt = Xval[i,:,:].reshape((1,lookback,nfeatures))
             u = ypred[:i,:]
             tt[0,(lookback-i):lookback,:] = u
-            ypred[i,:] = model.predict(tt)
         else:
             tt = ypred[i-lookback:i,:].reshape((1,lookback,nfeatures))
-            ypred[i,:] = model.predict(tt)
+    
+    ypred[i,:] = model.predict(tt)
+    
     return ypred
 
 
